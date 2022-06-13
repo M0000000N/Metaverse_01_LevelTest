@@ -1,6 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 
 #include "header.h"
+using namespace std;
 
 #pragma region solution_01
 ////1.	포인터와 레퍼런스를 활용해 함수 외부에서 선언된 두 정수형 변수의 값을 서로 바꾸는 Swap 함수를 각각 구현하시오.
@@ -55,16 +56,15 @@
 #pragma endregion
 
 #pragma region solution_04
-////4.	배열의 값을 오름차순으로 정렬해서 반환하는 함수를 구현 하시오.
 ////[ 해결 아이디어 ]
 ////arr[0]부터 arr[4]까지 비교
 ////1과 2, 3, 4, 5를 비교해서 작을때마다 과 값 바꿈저장
 ////끝나면 index++
-// 
+//
 //int arr[5] = { 5, 2, 4, 1, 3 };
 //void sortArray(int* arr, int n)
 //{
-//	int index = 0;
+//	/*int index = 0;
 //	while(index < n)
 //	{
 //		for(int i = 0; i < n; i++)
@@ -77,11 +77,21 @@
 //			}
 //		}
 //		index++;
-//	}
-//	/*for (int i = 0; i < n; i++)
-//	{
-//		printf("%d ", arr[i]);
 //	}*/
+//	//교수님 코드
+//	 for (int i = 0; i < n - 1; i++)
+//	{
+//		for (int phase = 0; phase < n - 1; n++)
+//		{
+//			int current = i;
+//			int next = i + 1;
+//			//  각 페이즈 마다 해줘야 할 일
+//			if (current > next)
+//			{
+//				std::swap(current, next);
+//			}
+//		}
+//	}
 //}
 //int main()
 //{
@@ -129,6 +139,44 @@
 //
 //	return 0;
 //}
+// 교수님 코드
+//int main()
+//{
+//	int maxValue;
+//	int digitCount;
+//	
+//	//입력
+//	cout << "생성할 로또의 최대값 : ";
+//	cin >> maxValue;
+//	cout << "생성할 숫자의 개수 : ";
+//	cin >> digitCount;
+//
+//	
+//	// 처리
+//	int* lotto = new int[digitCount];
+//
+//	srand(time(nullptr));
+//
+//	for (int curPos = 0; curPos < digitCount; curPos++)
+//	{
+//		int candidate = 0;
+//		bool isExist = false;
+//		do
+//		{
+//			int candidate = 1 + rand() % maxValue;
+//			bool isExist = false;
+//
+//			for (int i = 0; i < curPos; i++)
+//			{
+//				if (candidate == lotto[i])
+//				{
+//					isExist = true;
+//				}
+//			}
+//			delete[] lotto;							// 공간 돌려주기
+//		} while (isExist);
+//	}
+//}
 #pragma endregion
 
 #pragma region solution_06
@@ -137,10 +185,8 @@
 ////1. 입력
 ////2. 처리
 //// - 두 플레이어의 카드가 같으면 안된다.
-//// - 
 ////3. 출력
-//// player : 
-////
+//// player :
 //typedef struct _Card
 //{
 //	int icon = 0;
@@ -200,78 +246,200 @@
 //	//
 //	return 0;
 //}
-#pragma endregion
-#pragma region solution_07
-////int Find(int str, int* def, int n)
-////{
-////	def = (int*)malloc(sizeof(int));
-////	for (int i = 0; i < n; i++)
-////	{
-////		if (str == def[i])
-////			return 1;
-////	}
-////		return 0;
-////}
+
+//교수님코드///////////////////////////////////////////////////////
+//0~12 스페이드, 12~25 클로버, 26~38 하트, 28~51 다이아몬드, 52 조커
+//bool isUsedCard[53] = { false };
+//
+///// <summary>
+/////  카드 7장을 뽑는다.
+///// </summary>
+//int* PickCard()
+//{
+//	int* pickCard = new int[7];
+//
+//	for (int i = 0; i < 7; i++)
+//	{
+//		for (int j = 0; j < 7; j++)
+//		{
+//
+//		}
+//	}
+//
+//	delete[] pickCard;
+//}
+//
+///// <summary>
+///// 카드 7장 뽑는다.
+///// </summary>
+///// <param name="deck">플레이어의 덱</param>
+//void PickCard(int* deck)		//deck is out parameter
+//{
+//	// 7장을 뽑는다. 
+//	// 중복되지 않게 카드를 뽑아야함. 0~53까지
+//	srand(time(nullptr));
+//	int card = 0;
+//	isUsedCard[card] = false;
+//	do
+//	{
+//		int card = 0;
+//		isUsedCard[card] = false;
+//		for (int j = 0; j < 7; j++)
+//		{
+//			card = rand() % 54;
+//			*deck = card;
+//		}
+//	} while (isUsedCard[card]);
+//}
+//
+//std::string ConvertToCardString(int cardIndex)
+//{
+//	int cardType = cardIndex / 13;
+//	int cardNumber = cardIndex % 13;
+//
+//	static const string CARD_TYPE[] = { "♠", "♥", "♣", "◆" };
+//	static string CARD_NUMBER[] = { "A", "1","2","3","4","5","6","7","8","9","10","J","Q","K" };
+//
+//	if (cardType == 4)
+//	{
+//		return "Joker";
+//	}
+//	else
+//	{
+//		return CARD_TYPE[cardType] + CARD_NUMBER[cardNumber];
+//	}
+//}
+//
+//void Print(int* player)
+//{
+//	for (int i = 0; i < 7; ++i)
+//	{
+//		cout << ConvertToCardString(player[i]) << " ";
+//	}
+//}
 //
 //int main()
 //{
-//	//입력
-//	srand(time(NULL));
-//	int arr[5][5] = { 0, };
-//	int existNum[25] = { 0, };
-//	int index = 0;
+//	int player1[7] = { 0, };
+//	cout << "Player 1 : ";
+//	Print(player1);
+//	int player2[7];
+//	cout << "Player 2 : ";
+//	Print(player2);
 //
-//	int binggoCount = 0;
-//	int putnum = 0;
-//
-//	while (true)
-//	{
-//
-//		for (int i = 0; i < 5; i++)					// 배열에 랜덤한 수를 저장한다.
-//		{
-//			for (int j = 0; j < 5; j++)
-//			{
-//				arr[i][j] = rand() % 25 + 1;
-//				// 중복된게 있는지 검사한다
-//				for (int k = 0; k < 25; k++)
-//				{
-//					while (arr[i][j] != existNum[k])
-//					{
-//						arr[i][j] = rand() % 25 + 1;
-//						break;
-//					}
-//				}
-//				existNum[index] = arr[i][j];
-//				index++;
-//			}
-//		}
-//
-//		// 처리
-//		// arr[][]이랑 putnum이 같으면 00으로 바꿔줌
-//		for (int i = 0; i < 5; i++)					// 배열에 랜덤한 수를 저장한다.
-//		{
-//			for (int j = 0; j < 5; j++)
-//			{
-//				if (arr[i][j] == putnum)
-//				{
-//					arr[i][j] = 00;
-//				}
-//			}
-//		}
-//
-//		//출력
-//		for (int i = 0; i < 5; i++)
-//		{
-//			for (int j = 0; j < 5; j++)
-//			{
-//				printf("%d   ", arr[i][j]);
-//			}
-//			printf("\n");
-//		}
-//		printf("현재 %d줄의 빙고가 완성되었습니다.\n숫자를 입력해 주세요 : ", binggoCount);
-//		scanf("%d", putnum);
-//		
-//		return 0;
-//	}
 //}
+#pragma endregion
+
+#pragma region solution_07
+//int Find(int str, int* def, int n)
+//{
+//	def = (int*)malloc(sizeof(int));
+//	for (int i = 0; i < n; i++)
+//	{
+//		if (str == def[i])
+//			return 1;
+//	}
+//		return 0;
+//}
+
+int main()
+{
+	//입력
+	srand(time(NULL));
+	int arr[5][5] = { 0, };
+	bool existNum[26] = { false };
+
+	int binggoCount = 0;
+	int input = 0;
+
+	while (true)
+	{
+		for (int i = 0; i < 5; i++)					// 배열에 랜덤한 수를 저장한다.
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				int number = 0;
+				do
+				{
+					number = rand() % 25 + 1;		// 중복 체크
+
+				} while (existNum[number]);
+
+				arr[i][j] = rand() % 25 + 1;
+				existNum[number] = true;
+			}
+		}
+
+		// 처리
+
+		if (0 < input || input < 26)				// 플레이어의 입력이 정상인지 확인한다.
+		{
+			for (int i = 0; i < 5; i++)				// arr[][]이랑 putnum이 같으면 00으로 바꿔줌
+			{
+				for (int j = 0; j < 5; j++)
+				{
+					if (arr[i][j] == input)
+					{
+						arr[i][j] = 00;
+					}
+				}
+				// 빙고 개수를 센다.
+				int binggo = 0;
+				for (int i = 0; i < 5; i++)		// 가로로 똑같은거
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						if (arr[i][j] == arr[i][j + 1])
+							binggo++;
+					}
+					if (binggo == 4)
+					{
+						binggoCount++;
+					}
+				}
+
+				for (int i = 0; i < 5; i++)		// 세로로 똑같은거
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						if (arr[j][i] == arr[j + 1][i])
+							binggo++;
+					}
+					if (binggo == 4)
+					{
+						binggoCount++;
+					}
+				}
+
+				if (arr[0][0] == arr[1][1] == arr[2][2] == arr[3][3] == arr[4][4])		//대각선 같은거
+				{
+					binggoCount++;
+				}
+				 if (arr[0][4] == arr[1][3] == arr[2][2] == arr[3][1] == arr[4][0])
+				{
+					binggoCount++;
+				}
+			}
+		}
+		else
+		{
+			return 0;
+		}
+
+		//출력
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				printf("%d   ", arr[i][j]);
+			}
+			printf("\n");
+		}
+
+		cout << "현재" << binggoCount << "줄의 빙고가 완성되었습니다.\n숫자를 입력해 주세요 : ";
+		cin >> input;
+		//system("cls");
+	}
+	return 0;
+}
 #pragma endregion
