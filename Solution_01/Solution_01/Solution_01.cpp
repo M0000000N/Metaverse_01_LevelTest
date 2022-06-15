@@ -100,6 +100,74 @@ using namespace std;
 #pragma endregion
 
 #pragma region solution_05
+#pragma region 객체지향설계
+//class LimitedLotto
+//{
+//	static const int MAX_DIGIT_COUNT = 100;
+//public:
+//	int *_digitcount;
+//	_digitCount = 0;
+//};
+///// <summary>
+///// 로또 번호를 생성한다. 이미 생성된 번호가 있다면 지우고 새로 만든다.
+///// </summary>
+///// <param name="maxValue">최대 번호값</param>
+///// <param name="digitCount">생성 숫자 개수. 최대 생성 숫자는 100개</param>
+//void Make(int maxValue, int digitCount)
+//{
+//	// digitCount : [1, 100]
+//	// 1. digitCount가 최솟값(1)보다 작을 때
+//	// 2. digitCount가 최댓값(100)보다 작을 때
+//	// 3. digitCount가 최솟값과 최댓값 사이에 있을 때
+//
+//	digitCount = std::max(1, std::min(digitCount, MAX_DIGIT_COUNT));
+//
+//	// 1~mazValue 사이의 값 중 중복되지 않게 digitCount만큼 뽑음.
+//	_digitCount = digitCount;
+//	
+//	srand(time(nullptr));
+//	
+//	// 로또번호 정하기
+//	// 3. 1번부터 digitCount만큼 반복한다.
+//	for(int curPos = 0; curPos , digitCount;)
+//	int* arr = (int*)malloc(sizeof(int) * digitCount);	// 로또값이 담길 배열arr 생성
+//
+//	int i = 0;
+//	bool isExist = false;
+//
+//	do
+//	{
+//		int candidate = 1 + rand() % maxValue;
+//		bool isExist = false;
+//
+//		for (int i = 0; i < curPos; i++)
+//		{
+//			if (candidate == lotto[i])
+//			{
+//				isExist = true;
+//			}
+//		}
+//		delete[] lotto;							// 공간 돌려주기
+//	} while (isExist);
+//	
+//	do
+//	{
+//		arr[i] = rand() % maxValue + 1;				// 랜덤으로 숫자를 arr에 넣는다
+//		bool isExist = false;
+//		for (int i = 0 < i < maxValue; i++)
+//		{
+//			if (arr[i] == )
+//			{
+//				isExist = true;
+//			}
+//		}
+//	} while (isExist)
+//}
+//};
+// Print() : 로또 번호를 출력한다. 만약에 생성된 번호가 없다면 아무것도 출력하지 않는다.
+#pragma endregion
+
+#pragma region 내코드
 //void LottoMaker(int max, int num)	// 최댓값과 생성숫자를 받아 로또번호를 만드는 함수
 //{
 //	// 처리
@@ -139,7 +207,9 @@ using namespace std;
 //
 //	return 0;
 //}
-// 교수님 코드
+#pragma endregion
+
+#pragma region 교수님코드
 //int main()
 //{
 //	int maxValue;
@@ -177,6 +247,7 @@ using namespace std;
 //		} while (isExist);
 //	}
 //}
+#pragma endregion
 #pragma endregion
 
 #pragma region solution_06
@@ -341,105 +412,259 @@ using namespace std;
 //	}
 //		return 0;
 //}
-
+//#define BLANK 0
+//int main()
+//{
+//	//입력
+//	srand(time(NULL));
+//	bool existNum[26] = { false };
+//	int arr[5][5] = { 0, };
+//
+//	int binggoCount = 0;
+//	int input = 0;
+//
+//	bool isExist = false;
+//
+//	while (true)
+//	{
+//		system("cls");
+//		for (int i = 0; i < 5; i++)					// 배열에 랜덤한 수를 저장한다.
+//		{
+//			for (int j = 0; j < 5; j++)
+//			{
+//				int number = 0;
+//				do
+//				{
+//					number = rand() % 25 + 1;		// 중복 체크
+//
+//				} while (existNum[number]);
+//
+//				arr[i][j] = number;
+//				existNum[number] = true;
+//			}
+//		}
+//
+//		// 출력
+//		for (int i = 0; i < 5; i++)
+//		{
+//			for (int j = 0; j < 5; j++)
+//			{
+//				if (arr[i][j] == BLANK)				// arr[][]이랑 putnum이 같으면 00으로 바꿔줌
+//				{
+//					cout << "\t";
+//				}
+//				else
+//
+//				cout << arr[i][j] << "\t";
+//			}
+//			cout <<endl << endl;
+//		}
+//
+//		cout << "현재" << binggoCount << "줄의 빙고가 완성되었습니다.\n숫자를 입력해 주세요 : ";
+//		cin >> input;
+//
+//		// 처리
+//
+//		if (0 < input || input < 26)				// 플레이어의 입력이 정상인지 확인한다.
+//		{
+//			for (int i = 0; i < 5; i++)
+//			{
+//				for (int j = 0; j < 5; j++)
+//				{
+//					if (arr[i][j] == input)				// arr[][]이랑 putnum이 같으면 00으로 바꿔줌
+//					{
+//						arr[i][j] == BLANK;
+//						existNum[i*j] = true;
+//						break;
+//					}
+//				}
+//				if (isExist)
+//				{
+//					break;
+//				}
+//			}
+//
+//			// 빙고 개수를 센다.
+//			int binggo = 0;
+//
+//			for (int i = 0; i < 5; i++)		// 가로로 똑같은거
+//			{
+//				for (int j = 0; j < 4; j++)
+//				{
+//					if (arr[i][j] == arr[i][j + 1])
+//						binggo++;
+//				}
+//				if (binggo == 4)
+//				{
+//					binggoCount++;
+//				}
+//			}
+//
+//			for (int i = 0; i < 5; i++)		// 세로로 똑같은거
+//			{
+//				for (int j = 0; j < 4; j++)
+//				{
+//					if (arr[j][i] == arr[j + 1][i])
+//						binggo++;
+//				}
+//				if (binggo == 4)
+//				{
+//					binggoCount++;
+//				}
+//			}
+//
+//			if (arr[0][0] == arr[1][1] == arr[2][2] == arr[3][3] == arr[4][4])		//대각선 같은거
+//			{
+//				binggoCount++;
+//			}
+//			if (arr[0][4] == arr[1][3] == arr[2][2] == arr[3][1] == arr[4][0])
+//			{
+//				binggoCount++;
+//			}
+//		}
+//		else
+//		{
+//			return 0;
+//		}
+//
+//	}
+//	return 0;
+//}
+#pragma endregion
+#pragma region solution_08
+#pragma region 객체지향설계
 int main()
 {
-	//입력
-	srand(time(NULL));
-	int arr[5][5] = { 0, };
-	bool existNum[26] = { false };
-
-	int binggoCount = 0;
-	int input = 0;
-
-	while (true)
+	// 입력 
+	int arr[100][100] = { 0, };
+	cout << "배열의 크기를 입력하세요 : ";
+	int N = 0;
+	cin >> N;
+	
+	// 처리
+	for (int i = 0; i < N; i++)			//N*N 배열만들고 0으로 초기화
 	{
-		for (int i = 0; i < 5; i++)					// 배열에 랜덤한 수를 저장한다.
+		for (int j = 0; j < N; j++)
 		{
-			for (int j = 0; j < 5; j++)
-			{
-				int number = 0;
-				do
-				{
-					number = rand() % 25 + 1;		// 중복 체크
-
-				} while (existNum[number]);
-
-				arr[i][j] = rand() % 25 + 1;
-				existNum[number] = true;
-			}
+			arr[i][j] = 0;
 		}
-
-		// 처리
-
-		if (0 < input || input < 26)				// 플레이어의 입력이 정상인지 확인한다.
-		{
-			for (int i = 0; i < 5; i++)				// arr[][]이랑 putnum이 같으면 00으로 바꿔줌
-			{
-				for (int j = 0; j < 5; j++)
-				{
-					if (arr[i][j] == input)
-					{
-						arr[i][j] = 00;
-					}
-				}
-				// 빙고 개수를 센다.
-				int binggo = 0;
-				for (int i = 0; i < 5; i++)		// 가로로 똑같은거
-				{
-					for (int j = 0; j < 4; j++)
-					{
-						if (arr[i][j] == arr[i][j + 1])
-							binggo++;
-					}
-					if (binggo == 4)
-					{
-						binggoCount++;
-					}
-				}
-
-				for (int i = 0; i < 5; i++)		// 세로로 똑같은거
-				{
-					for (int j = 0; j < 4; j++)
-					{
-						if (arr[j][i] == arr[j + 1][i])
-							binggo++;
-					}
-					if (binggo == 4)
-					{
-						binggoCount++;
-					}
-				}
-
-				if (arr[0][0] == arr[1][1] == arr[2][2] == arr[3][3] == arr[4][4])		//대각선 같은거
-				{
-					binggoCount++;
-				}
-				 if (arr[0][4] == arr[1][3] == arr[2][2] == arr[3][1] == arr[4][0])
-				{
-					binggoCount++;
-				}
-			}
-		}
-		else
-		{
-			return 0;
-		}
-
-		//출력
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 5; j++)
-			{
-				printf("%d   ", arr[i][j]);
-			}
-			printf("\n");
-		}
-
-		cout << "현재" << binggoCount << "줄의 빙고가 완성되었습니다.\n숫자를 입력해 주세요 : ";
-		cin >> input;
-		//system("cls");
 	}
-	return 0;
+
+	// 초기값 설정
+	int i = 0;
+	int j = 0;
+	arr[i][j] = 1;
+	int a = 2;
+
+	while (a<= N * N) // 값은 배열의 크기보다 작거나 같다.
+	{
+		// while을 쓰는 이유 : 대충 어디까지인지는(범위는) 아는데 정확히는 모른다.
+
+		// 조건의 의미 : 배열 수가 N보다 크면 안됨
+		//				증가하는 방향 값이 0이어야함
+		while (j + 1 < N && arr[i][j + 1] == 0)	// 오른쪽으로 가는 동안
+		{
+			j++;
+			arr[i][j] = a;
+			a++;
+		}
+		while (i + 1 < N && arr[i + 1][j] == 0)	// 아래로 가는 동안
+		{
+			i++;
+			arr[i][j] = a;
+			a++;
+		}
+		while (j - 1 >= 0  && arr[i][j - 1] == 0)	// 왼쪽으로 가는 동안
+		{
+			j--;
+			arr[i][j] = a;
+			a++;
+		}
+		while (i - 1 >= 0 && arr[i - 1][j] == 0)	// 위로 가는 동안
+		{
+			i--;
+			arr[i][j] = a;
+			a++;
+		}
+	}
+
+	// 출력
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+		{
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl << endl;
+	}
 }
+#pragma endregioin
+
+#pragma region 내코드
+//int main()
+//{
+//	// 입력 
+//	int arr[100][100] = { 0, };
+//	cout << "배열의 크기를 입력하세요 : ";
+//	int N = 0;
+//	cin >> N;
+//	
+//	// 처리
+//	for (int i = 0; i < N; i++)			//N*N 배열만들고 0으로 초기화
+//	{
+//		for (int j = 0; j < N; j++)
+//		{
+//			arr[i][j] = 0;
+//		}
+//	}
+//
+//	// 초기값 설정
+//	int i = 0;
+//	int j = 0;
+//	arr[i][j] = 1;
+//	int a = 2;
+//
+//	while (a<= N * N) // 값은 배열의 크기보다 작거나 같다.
+//	{
+//		// while을 쓰는 이유 : 대충 어디까지인지는(범위는) 아는데 정확히는 모른다.
+//
+//		// 조건의 의미 : 배열 수가 N보다 크면 안됨
+//		//				증가하는 방향 값이 0이어야함
+//		while (j + 1 < N && arr[i][j + 1] == 0)	// 오른쪽으로 가는 동안
+//		{
+//			j++;
+//			arr[i][j] = a;
+//			a++;
+//		}
+//		while (i + 1 < N && arr[i + 1][j] == 0)	// 아래로 가는 동안
+//		{
+//			i++;
+//			arr[i][j] = a;
+//			a++;
+//		}
+//		while (j - 1 >= 0  && arr[i][j - 1] == 0)	// 왼쪽으로 가는 동안
+//		{
+//			j--;
+//			arr[i][j] = a;
+//			a++;
+//		}
+//		while (i - 1 >= 0 && arr[i - 1][j] == 0)	// 위로 가는 동안
+//		{
+//			i--;
+//			arr[i][j] = a;
+//			a++;
+//		}
+//	}
+//
+//	// 출력
+//	for (int i = 0; i < N; i++)
+//	{
+//		for (int j = 0; j < N; j++)
+//		{
+//			cout << arr[i][j] << "\t";
+//		}
+//		cout << endl << endl;
+//	}
+//}
+#pragma endregion
 #pragma endregion
