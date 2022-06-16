@@ -1,6 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 
 #include "header.h"
+
 using namespace std;
 
 #pragma region solution_01
@@ -100,6 +101,7 @@ using namespace std;
 #pragma endregion
 
 #pragma region solution_05
+
 #pragma region 객체지향설계
 //class LimitedLotto
 //{
@@ -248,9 +250,193 @@ using namespace std;
 //	}
 //}
 #pragma endregion
+
 #pragma endregion
 
 #pragma region solution_06
+
+#pragma region 모듈화
+////교수님코드///////////////////////////////////////////////////////
+////0~12 스페이드, 12~25 클로버, 26~38 하트, 28~51 다이아몬드, 52 조커
+//#pragma once
+//
+//#include <iostream>
+//#include <string>
+//#include <sstream>
+//
+//// Deck 타입
+//// ToString()
+////   : 현재 덱의 카드를 표현하는 문자열을 만든다.
+////     카드가 없는 경우 "The deck is empty" 로 반환한다.
+//
+////using namespace std;
+//
+//class Deck
+//{
+//	static bool isUsedCard[54];
+//	static int remainCard;
+//public:
+//	/// <summary>
+//	/// 카드를 7장 뽑아서 덱을 구성한다.
+//	/// 모든 덱은 카드가 중복되지 않아야 한다.
+//	/// </summary>
+//	/// <returns>덱이 성공적으로 구성됐을 경우 true, 아니면 false</returns>
+//	bool	Make()
+//	{
+//		int count = 0;
+//
+//		// isUsedCard를 순회하면서 남은 카드가 7장 이상인지를 확인한다.
+//		if (remainCard < 7)
+//		{
+//			return false;
+//		}
+//
+//		for (int i = 0; i < 7; i++)
+//		{
+//			int card = 0;
+//			do
+//			{
+//				card = 1 + rand() % 53;
+//			} while (isUsedCard[card]);
+//
+//			_deck[i] = card;
+//			isUsedCard[card] = true;	// 카드 뽑았다고 알려줌
+//
+//		}
+//		// 사후 조건 : 덱이 완성되었다.
+//		remainCard -= 7;
+//
+//		return true;
+//	}
+//
+//	/// <summary>
+//	/// 현재 덱의 카드를 표현하는 문자열을 만듬
+//	/// 카드가 없는 경우 "The deck is empty"를 반환
+//	/// </summary>
+//	/// <returns></returns>
+//	std::string ToString()
+//	{
+//		if (_deck[0] == 0)
+//		{
+//			return "The deck is empty";
+//		}
+//		std::string result;
+//
+//		static const std::string CARD_TYPE[] = { "♠", "♣", "♥", "◆" };
+//		static const std::string CARD_NUMBER[] = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
+//		// 1. 덱을 불러와 숫자를 읽음
+//		for (int i = 0; i < 7; ++i)
+//		{
+//			if (_deck[i] == 53)
+//			{
+//				result += "Joker, ";
+//			}
+//			else
+//			{
+//				result += CARD_TYPE[_deck[i] / 13] + CARD_NUMBER[_deck[i] % 13] + ", ";
+//			}
+//		}
+//		// 4. 타입과 숫자에 맞춰 조합한 수 반환
+//
+//		return result;
+//	}
+//
+//private:
+//	int _deck[7] = { 0 };
+//};
+//
+//int main()
+//{
+//	Deck decks[8];
+//
+//	for (int i = 0; i < 8; ++i)
+//	{
+//		if (false == decks[i].Make())
+//		{
+//			cout << i + 1 << "번째는 덱 구성 실패\n";
+//		}
+//	}
+//
+//	for (int i = 0; i < 8; ++i)
+//	{
+//		cout << decks[i].ToString() << "\n";
+//	}
+//}
+#pragma endregion
+
+#pragma region 교수님코드
+///// <summary>
+///// 로또 번호를 만든다.
+///// </summary>
+///// <param name="maxValue">최대 번호값</param>
+///// <param name="digitCount">생성 숫자 개수</param>
+///// <returns>로또 번호들 (동적 할당된) </returns>
+//int* MakeLotto(int maxValue, int digitCount)
+//{
+//	// 1 ~ maxValue 사이의 값 중 중복되지 않게 digitCount만큼 뽑음.
+//	int* lotto = new int[digitCount];
+//
+//	srand(time(nullptr));
+//
+//	// 로또 번호 정하기
+//	// 3. 1번부터 digitCount만큼 반복한다.
+//	for (int curPos = 0; curPos < digitCount; ++curPos)
+//	{
+//		int candidate = 0;
+//		bool isExist = false;
+//
+//		do
+//		{
+//			// 1. [1, maxValue] 사이의 값으로 무작위로 뽑는다.
+//			candidate = 1 + rand() % maxValue;
+//			isExist = false;
+//
+//			// 2. 중복인지 확인한다. => 이미 나온 값인지 확인한다.
+//			for (int i = 0; i < curPos; ++i)
+//			{
+//				// 2-1. 중복이면? 1번을 다시 수행한다.
+//				if (candidate == lotto[i])
+//				{
+//					isExist = true;
+//
+//					break;
+//				}
+//			}
+//		} while (isExist);
+//
+//		// 2-2. 중복이 아니면? 데이터를 저장한다.
+//		lotto[curPos] = candidate;
+//	}
+//
+//	return lotto;
+//}
+//
+//int main()
+//{
+//	// 입력 : 최대 번호값과 생성 숫자 개수 입력 받는다.
+//	cout << "최대 번호 값을 입력하세요. : ";
+//	int maxValue;
+//	cin >> maxValue;
+//
+//	cout << "생성할 숫자의 개수를 입력하세요. : ";
+//	int digitCount;
+//	cin >> digitCount;
+//
+//	// 처리 : 로또 생성 
+//	int* lotto = MakeLotto(maxValue, digitCount); // 생성? 생성자
+//
+//	// 출력 : 로또 번호 출력
+//	for (int i = 0; i < digitCount; ++i)
+//	{
+//		cout << lotto[i] << " ";
+//	}
+//
+//	delete[] lotto;
+//
+//	return 0;
+//}
+#pragma endregion
+
 //// [못푼 이유]
 //// ♠♣♥◆를 출력하는 방법을 몰라서 타입과 출력방법 서칭하다가 시간이 다 갔습니다.
 ////1. 입력
@@ -318,91 +504,150 @@ using namespace std;
 //	return 0;
 //}
 
-//교수님코드///////////////////////////////////////////////////////
-//0~12 스페이드, 12~25 클로버, 26~38 하트, 28~51 다이아몬드, 52 조커
-//bool isUsedCard[53] = { false };
-//
-///// <summary>
-/////  카드 7장을 뽑는다.
-///// </summary>
-//int* PickCard()
-//{
-//	int* pickCard = new int[7];
-//
-//	for (int i = 0; i < 7; i++)
-//	{
-//		for (int j = 0; j < 7; j++)
-//		{
-//
-//		}
-//	}
-//
-//	delete[] pickCard;
-//}
-//
-///// <summary>
-///// 카드 7장 뽑는다.
-///// </summary>
-///// <param name="deck">플레이어의 덱</param>
-//void PickCard(int* deck)		//deck is out parameter
-//{
-//	// 7장을 뽑는다. 
-//	// 중복되지 않게 카드를 뽑아야함. 0~53까지
-//	srand(time(nullptr));
-//	int card = 0;
-//	isUsedCard[card] = false;
-//	do
-//	{
-//		int card = 0;
-//		isUsedCard[card] = false;
-//		for (int j = 0; j < 7; j++)
-//		{
-//			card = rand() % 54;
-//			*deck = card;
-//		}
-//	} while (isUsedCard[card]);
-//}
-//
-//std::string ConvertToCardString(int cardIndex)
-//{
-//	int cardType = cardIndex / 13;
-//	int cardNumber = cardIndex % 13;
-//
-//	static const string CARD_TYPE[] = { "♠", "♥", "♣", "◆" };
-//	static string CARD_NUMBER[] = { "A", "1","2","3","4","5","6","7","8","9","10","J","Q","K" };
-//
-//	if (cardType == 4)
-//	{
-//		return "Joker";
-//	}
-//	else
-//	{
-//		return CARD_TYPE[cardType] + CARD_NUMBER[cardNumber];
-//	}
-//}
-//
-//void Print(int* player)
-//{
-//	for (int i = 0; i < 7; ++i)
-//	{
-//		cout << ConvertToCardString(player[i]) << " ";
-//	}
-//}
-//
-//int main()
-//{
-//	int player1[7] = { 0, };
-//	cout << "Player 1 : ";
-//	Print(player1);
-//	int player2[7];
-//	cout << "Player 2 : ";
-//	Print(player2);
-//
-//}
 #pragma endregion
 
 #pragma region solution_07
-//int Find(int str, int* def, int n)
+//#define BLANK 0
+//int main()
+//{
+//	bool isUsed[26] = { false };
+//	int board[5][5];
+//
+//	for (int r = 0; r < 5; r++)			// 빙고판 세팅
+//	{
+//		for (int c = 0; c < 5; c++)
+//		{
+//			int n = 0;
+//			do
+//			{
+//				n = rand() % 25 + 1;
+//			} while (isUsed[n]);
+//			board[r][c] = n;
+//			isUsed[n] = true;
+//		}
+//	}
+//	
+//	int bingoCount = 0;
+//	while (bingoCount <= 12)
+//	{
+//		system("cls");
+//
+//	// [   출력   ]
+//	for (int r = 0; r < 5; r++)			// 빙고판 출력
+//	{
+//		bool isBingo = true;
+//		for (int c = 0; c < 5; c++)
+//		{
+//			if (board[r][c] == BLANK)
+//			{
+//				cout << "\t";
+//			}
+//			else
+//			{
+//				cout << board[r][c] << "\t";
+//			}
+//		}
+//		cout << endl;
+//	}
+//
+//	cout << "현재" << bingoCount << "줄의 빙고가 완성되었습니다.\n";
+//	cout << "숫자를 입력해 주세요 : ";
+//
+//
+//		// [   입력   ]
+//		int input;
+//		cin >> input;
+//
+//
+//		if (input < 0 || input >25)			// 오입력 처리
+//		{
+//			continue;
+//		}
+//
+//		// [   처리   ]
+//		for (int r = 0; r < 5; r++)			// 빙고판 업데이트
+//		{
+//			bool isExist = false;
+//			for (int c = 0; c < 5; c++)
+//			{
+//				if (board[r][c] == input)
+//				{
+//					board[r][c] = BLANK;
+//					isExist = true;
+//					break;
+//				}
+//			}
+//			if (isExist)
+//			{
+//				break;
+//			}
+//		}
+//
+//		for (int r = 0; r < 5; r++)			// 가로의 모든 숫자를 지운 것
+//		{
+//			bool isBingo = true;
+//			for (int c = 0; c < 5; c++)
+//			{
+//				if (board[r][c] != BLANK)
+//				{
+//					isBingo = false;
+//					break;
+//				}
+//			}
+//
+//			if (isBingo)
+//			{
+//				bingoCount++;
+//			}
+//		}
+//
+//		for (int r = 0; r < 5; r++)			// 세로의 모든 숫자를 지운 것
+//		{
+//			bool isBingo = true;
+//			for (int c = 0; c < 5; c++)
+//			{
+//				if (board[c][r] != BLANK)
+//				{
+//					isBingo = false;
+//					break;
+//				}
+//			}
+//
+//			if (isBingo)
+//			{
+//				bingoCount++;
+//			}
+//		}
+//
+//		bool isBingo = true;
+//		for (int i = 0; i < 5; i++)			// 대각선의 모든 숫자를 지운 것
+//		{
+//			if (board[i][i] != BLANK)
+//			{
+//				isBingo = false;
+//				break;
+//			}
+//		}
+//		
+//		for (int i = 0; i < 5; i++)			// 반대 대각선의 모든 숫자를 지운 것
+//		{
+//			if (board[i][4 - i] != BLANK)
+//			{
+//				isBingo = false;
+//				break;
+//			}
+//		}
+//		if (isBingo)
+//		{
+//			bingoCount++;
+//		}
+//
+//	}
+//	return 0;
+//}
+
+
+//int find(int str, int* def, int n)
 //{
 //	def = (int*)malloc(sizeof(int));
 //	for (int i = 0; i < n; i++)
@@ -412,18 +657,17 @@ using namespace std;
 //	}
 //		return 0;
 //}
-//#define BLANK 0
 //int main()
 //{
 //	//입력
-//	srand(time(NULL));
-//	bool existNum[26] = { false };
+//	srand(time(nullptr));
+//	bool existnum[26] = { false };
 //	int arr[5][5] = { 0, };
 //
-//	int binggoCount = 0;
+//	int binggocount = 0;
 //	int input = 0;
 //
-//	bool isExist = false;
+//	bool isexist = false;
 //
 //	while (true)
 //	{
@@ -437,10 +681,10 @@ using namespace std;
 //				{
 //					number = rand() % 25 + 1;		// 중복 체크
 //
-//				} while (existNum[number]);
+//				} while (existnum[number]);
 //
 //				arr[i][j] = number;
-//				existNum[number] = true;
+//				existnum[number] = true;
 //			}
 //		}
 //
@@ -460,7 +704,7 @@ using namespace std;
 //			cout <<endl << endl;
 //		}
 //
-//		cout << "현재" << binggoCount << "줄의 빙고가 완성되었습니다.\n숫자를 입력해 주세요 : ";
+//		cout << "현재" << binggocount << "줄의 빙고가 완성되었습니다.\n숫자를 입력해 주세요 : ";
 //		cin >> input;
 //
 //		// 처리
@@ -474,11 +718,11 @@ using namespace std;
 //					if (arr[i][j] == input)				// arr[][]이랑 putnum이 같으면 00으로 바꿔줌
 //					{
 //						arr[i][j] == BLANK;
-//						existNum[i*j] = true;
+//						existnum[i*j] = true;
 //						break;
 //					}
 //				}
-//				if (isExist)
+//				if (isexist)
 //				{
 //					break;
 //				}
@@ -496,7 +740,7 @@ using namespace std;
 //				}
 //				if (binggo == 4)
 //				{
-//					binggoCount++;
+//					binggocount++;
 //				}
 //			}
 //
@@ -509,17 +753,17 @@ using namespace std;
 //				}
 //				if (binggo == 4)
 //				{
-//					binggoCount++;
+//					binggocount++;
 //				}
 //			}
 //
 //			if (arr[0][0] == arr[1][1] == arr[2][2] == arr[3][3] == arr[4][4])		//대각선 같은거
 //			{
-//				binggoCount++;
+//				binggocount++;
 //			}
 //			if (arr[0][4] == arr[1][3] == arr[2][2] == arr[3][1] == arr[4][0])
 //			{
-//				binggoCount++;
+//				binggocount++;
 //			}
 //		}
 //		else
@@ -531,74 +775,26 @@ using namespace std;
 //	return 0;
 //}
 #pragma endregion
+
 #pragma region solution_08
+
 #pragma region 객체지향설계
+#include "snail.h"
 int main()
 {
-	// 입력 
-	int arr[100][100] = { 0, };
-	cout << "배열의 크기를 입력하세요 : ";
-	int N = 0;
-	cin >> N;
+	Snail snail;
+	int size = 0;
 	
-	// 처리
-	for (int i = 0; i < N; i++)			//N*N 배열만들고 0으로 초기화
-	{
-		for (int j = 0; j < N; j++)
-		{
-			arr[i][j] = 0;
-		}
-	}
+	cout << "배열의 크기를 입력하세요 : ";
+	cin >> size;
+	
+	snail.Init(size);
 
-	// 초기값 설정
-	int i = 0;
-	int j = 0;
-	arr[i][j] = 1;
-	int a = 2;
+	snail.update();
 
-	while (a<= N * N) // 값은 배열의 크기보다 작거나 같다.
-	{
-		// while을 쓰는 이유 : 대충 어디까지인지는(범위는) 아는데 정확히는 모른다.
-
-		// 조건의 의미 : 배열 수가 N보다 크면 안됨
-		//				증가하는 방향 값이 0이어야함
-		while (j + 1 < N && arr[i][j + 1] == 0)	// 오른쪽으로 가는 동안
-		{
-			j++;
-			arr[i][j] = a;
-			a++;
-		}
-		while (i + 1 < N && arr[i + 1][j] == 0)	// 아래로 가는 동안
-		{
-			i++;
-			arr[i][j] = a;
-			a++;
-		}
-		while (j - 1 >= 0  && arr[i][j - 1] == 0)	// 왼쪽으로 가는 동안
-		{
-			j--;
-			arr[i][j] = a;
-			a++;
-		}
-		while (i - 1 >= 0 && arr[i - 1][j] == 0)	// 위로 가는 동안
-		{
-			i--;
-			arr[i][j] = a;
-			a++;
-		}
-	}
-
-	// 출력
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			cout << arr[i][j] << "\t";
-		}
-		cout << endl << endl;
-	}
+	snail.print();
 }
-#pragma endregioin
+#pragma endregion
 
 #pragma region 내코드
 //int main()
@@ -667,4 +863,5 @@ int main()
 //	}
 //}
 #pragma endregion
+
 #pragma endregion
